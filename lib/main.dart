@@ -20,7 +20,7 @@ class ZZLiving extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: IndexTab(),
     );

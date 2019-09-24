@@ -26,7 +26,7 @@ class IndexTab extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.black26,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.red,
         items: _bottomTabs,
         currentIndex: provide.currentPage,
         onTap: (index){

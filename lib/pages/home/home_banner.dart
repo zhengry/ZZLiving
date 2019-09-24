@@ -28,3 +28,16 @@ class HomeBanner extends StatelessWidget {
     );
   }
 }
+
+class AdBanner extends StatelessWidget {
+  final String bannerImage;
+  const AdBanner({Key key,@required this.bannerImage}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 50,
+      child: Image.network(bannerImage,fit:BoxFit.fill),
+    );
+  }
+}
