@@ -1,7 +1,4 @@
 
-
-
-
 import 'package:flutter/foundation.dart';
 import 'package:zz_living/models/home_page_model.dart';
 import 'package:zz_living/network/network.dart';

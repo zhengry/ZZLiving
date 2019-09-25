@@ -25,6 +25,7 @@ class HomeCategoryView extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.width * 0.5,
       child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),//不可滑动
         padding: EdgeInsets.all(10),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5,
