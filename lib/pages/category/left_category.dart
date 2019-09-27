@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:zz_living/models/category_model.dart';
 import 'package:zz_living/provides/category_provide.dart';
+import 'package:zz_living/provides/category_goods_provide.dart';
 
 class LeftCategory extends StatelessWidget {
   final List<CategoryData> categoryList;
@@ -37,6 +38,8 @@ class LeftCategory extends StatelessWidget {
       child: InkWell(
         onTap: (){
           Provide.value<CategoryProvide>(context).selectMallIndex(index);
+          var categoryId = Provide.value<CategoryProvide>(context).currentMallCategoryId;
+          Provide.value<CategoryGoodsProvide>(context).changeCategoryId(categoryId);
         },
         child: Text(data.mallCategoryName,
           style: TextStyle(

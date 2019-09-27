@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:zz_living/models/category_model.dart';
 import 'package:zz_living/provides/category_provide.dart';
+import 'package:zz_living/provides/category_goods_provide.dart';
 
 class SubCategoryWidget extends StatelessWidget {
 
@@ -24,6 +25,7 @@ class SubCategoryWidget extends StatelessWidget {
         ),
         onTap: (){
           Provide.value<CategoryProvide>(context).changeSubCategory(category.mallSubId);
+          Provide.value<CategoryGoodsProvide>(context).changeSubCategoryId(category.mallSubId);
         },
       ),
     );

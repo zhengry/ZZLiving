@@ -12,6 +12,7 @@ class CategoryProvide with ChangeNotifier {
   String _currentSubCategoryId;//子类分类id
   int _selectedIndex = 0;
 
+
   List<CategoryData> get categoryList => _categoryList;
   String get currentMallCategoryId => _currentMallCategoryId;
   String get currentSubCategoryId => _currentSubCategoryId;
@@ -44,6 +45,7 @@ class CategoryProvide with ChangeNotifier {
     _selectedIndex = index;
     _currentMallCategoryId = category.mallCategoryId;
     _currentSubCategoryId = category.bxMallSubDto.first.mallSubId;
+    
     notifyListeners();
   }
 
@@ -53,4 +55,6 @@ class CategoryProvide with ChangeNotifier {
     CategoryModel model = CategoryModel.fromJson(json.decode(response.data));
     return model;
   }
+
+  // Future
 }
