@@ -11,8 +11,8 @@ class CategoryProvide with ChangeNotifier {
   List<CategoryData> _categoryList;//分类列表
   List<BxMallSubDto> _subCategoryList;//子类列表
   
-  int _categoryIndex = 0;
-  int _subCategoryIndex = 0;
+  int _categoryIndex;
+  int _subCategoryIndex;
   String _currentCategoryId;//大类分类id
   String _currentSubCategoryId;//子类分类id
 
@@ -33,6 +33,9 @@ class CategoryProvide with ChangeNotifier {
   }
 
   void selectCategoryIndex(int index){
+    if (index == _categoryIndex) {
+      return;
+    }
     CategoryData category = _categoryList[index];
     _categoryIndex = index;
     _subCategoryIndex = 0;
@@ -44,6 +47,9 @@ class CategoryProvide with ChangeNotifier {
   }
 
   void selectSubCategoryIndex(int index){
+    if (index == _subCategoryIndex) {
+      return;
+    }
     _subCategoryIndex = index;
     CategoryData category = _categoryList[_categoryIndex];
     _currentSubCategoryId = category.bxMallSubDto[_subCategoryIndex].mallSubId;

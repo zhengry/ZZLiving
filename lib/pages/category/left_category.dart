@@ -38,10 +38,11 @@ class LeftCategory extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Provide.value<CategoryProvide>(context).selectCategoryIndex(index);
-          var categoryId =
-              Provide.value<CategoryProvide>(context).selectedCategoryId;
+          var categoryId = Provide.value<CategoryProvide>(context).selectedCategoryId;
+          var subCategoryId = Provide.value<CategoryProvide>(context).selectedSubCategoryId;
           Provide.value<CategoryGoodsProvide>(context)
-              .changeCategoryId(categoryId);
+            ..changeCategoryId(categoryId)
+            ..changeSubCategoryId(subCategoryId);
         },
         child: Container(
             child: Text(

@@ -5,7 +5,7 @@ import 'package:zz_living/pages/category/left_category.dart';
 import 'package:zz_living/provides/category_provide.dart';
 import 'package:zz_living/provides/category_goods_provide.dart';
 import 'goods_list.dart';
-import 'sub_category_tab.dart';
+import 'sub_category.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key key}) : super(key: key);
@@ -33,8 +33,9 @@ class CategoryPage extends StatelessWidget {
                   Expanded(
                     child: Column(
                     children: <Widget>[
-                      SubCategoryTab(subCategories: provide.subCategoryList,
-                      selectedIndex: provide.subCategoryIndex),
+                      SubCategoryWidget(subCategoryList: provide.subCategoryList,selectedId: provide.selectedSubCategoryId,),
+                      // SubCategoryTab2(subCategories: provide.subCategoryList,
+                      // selectedIndex: provide.subCategoryIndex),
                       Provide<CategoryGoodsProvide>(builder: (context,child,goodsProvide){
                         if (goodsProvide.goodsList.length > 0) {
                           return GoodsListView(goodsList: Provide.value<CategoryGoodsProvide>(context).goodsList);

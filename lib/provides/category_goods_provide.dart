@@ -16,6 +16,9 @@ class CategoryGoodsProvide with ChangeNotifier {
   List<CategoryGoodsDetail> get goodsList => _goodsList;
   
   void changeCategoryId(String id) {
+    if (_categoryId == id && _goodsList.isNotEmpty) {
+      return;
+    }
     _categoryId = id;
     if (_categoryId != null && _subCategoryId != null) {
       _page = 1;
@@ -27,6 +30,9 @@ class CategoryGoodsProvide with ChangeNotifier {
   }
 
   void changeSubCategoryId(String id) {
+    if (_subCategoryId == id && _goodsList.isNotEmpty) {
+      return;
+    }
     _subCategoryId = id;
     if (_categoryId != null && _subCategoryId != null) {
       _page = 1;
@@ -39,6 +45,9 @@ class CategoryGoodsProvide with ChangeNotifier {
 
   void loadGoodsList() async {
     var model = await _requestCategoryGoods(categoryId, subCategoryId, page);
+    if (model == null) {
+      return null;
+    }
     if (model.data != null && model.data.isNotEmpty) {
       _goodsList.addAll(model.data);
       
@@ -56,6 +65,9 @@ class CategoryGoodsProvide with ChangeNotifier {
       'page': page
     };
     var response = await requestFor(MallGoodsURL, paras: paras);
+    if (response == null) {
+      return null;
+    }
     var model = CategoryGoodsModel.fromJson(json.decode(response.data));
     return model;
   }

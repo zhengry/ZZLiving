@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:zz_living/models/category_model.dart';
 import 'package:zz_living/provides/category_goods_provide.dart';
+import 'package:zz_living/provides/category_provide.dart';
 
 class SubCategoryWidget extends StatelessWidget {
 
@@ -10,7 +11,7 @@ class SubCategoryWidget extends StatelessWidget {
   // ScrollController _scrollController = ScrollController();
   SubCategoryWidget({Key key,this.subCategoryList,this.selectedId}) : super(key: key);
 
-  Widget _itemForSubCategory(BuildContext context, BxMallSubDto category){
+  Widget _itemForSubCategory(BuildContext context, BxMallSubDto category,int index){
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.only(right: 10),
@@ -23,7 +24,10 @@ class SubCategoryWidget extends StatelessWidget {
           ),
         ),
         onTap: (){
-          Provide.value<CategoryGoodsProvide>(context).changeSubCategoryId(category.mallSubId);
+          Provide.value<CategoryProvide>(context).selectSubCategoryIndex(index);
+          var subCategoryId = Provide.value<CategoryProvide>(context).selectedSubCategoryId;
+          Provide.value<CategoryGoodsProvide>(context)
+            .changeSubCategoryId(subCategoryId);
         },
       ),
     );
@@ -44,7 +48,7 @@ class SubCategoryWidget extends StatelessWidget {
         itemCount: subCategoryList.length,
         itemBuilder: (context,index){
           var category = subCategoryList[index];
-          return _itemForSubCategory(context, category);
+          return _itemForSubCategory(context, category,index);
         },
       ),
     );
