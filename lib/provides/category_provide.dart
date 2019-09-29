@@ -4,47 +4,49 @@ import 'package:flutter/widgets.dart';
 import 'package:zz_living/models/category_model.dart';
 import 'package:zz_living/network/network.dart';
 import 'dart:convert';
+import 'package:zz_living/models/category_goods.dart';
 
 class CategoryProvide with ChangeNotifier {
   
   List<CategoryData> _categoryList;//分类列表
-  String _currentMallCategoryId;//大类分类id
+  List<BxMallSubDto> _subCategoryList;//子类列表
+  
+  int _categoryIndex = 0;
+  int _subCategoryIndex = 0;
+  String _currentCategoryId;//大类分类id
   String _currentSubCategoryId;//子类分类id
-  int _selectedIndex = 0;
 
 
   List<CategoryData> get categoryList => _categoryList;
-  String get currentMallCategoryId => _currentMallCategoryId;
-  String get currentSubCategoryId => _currentSubCategoryId;
-
-  int get selectedIndex => _selectedIndex;
+  List<BxMallSubDto> get subCategoryList => _subCategoryList;
+  String get selectedCategoryId => _currentCategoryId;
+  String get selectedSubCategoryId => _currentSubCategoryId;
+  int get subCategoryIndex => _subCategoryIndex;
+  int get categoryIndex => _categoryIndex;
 
   //获取分类列表
   void loadCategoryList() async {
     var model = await _loadCategories();
     _categoryList = model.data;
-    selectMallIndex(0);
+    selectCategoryIndex(0);
     notifyListeners();
   }
 
-  // 修改大类分类
-  void changeMallCategory(String categoryId){
-    _currentMallCategoryId = categoryId;
-    notifyListeners();
-  }
-
-  //修改子类分类
-  void changeSubCategory(String subCategoryId){
-    _currentSubCategoryId = subCategoryId;
-    print('子类id----->$subCategoryId');
-    notifyListeners();
-  }
-
-  void selectMallIndex(int index){
+  void selectCategoryIndex(int index){
     CategoryData category = _categoryList[index];
-    _selectedIndex = index;
-    _currentMallCategoryId = category.mallCategoryId;
+    _categoryIndex = index;
+    _subCategoryIndex = 0;
+    _currentCategoryId = category.mallCategoryId;
     _currentSubCategoryId = category.bxMallSubDto.first.mallSubId;
+    _subCategoryList = category.bxMallSubDto;
+    
+    notifyListeners();
+  }
+
+  void selectSubCategoryIndex(int index){
+    _subCategoryIndex = index;
+    CategoryData category = _categoryList[_categoryIndex];
+    _currentSubCategoryId = category.bxMallSubDto[_subCategoryIndex].mallSubId;
     
     notifyListeners();
   }
@@ -53,8 +55,7 @@ class CategoryProvide with ChangeNotifier {
   Future<CategoryModel> _loadCategories() async {
     Response response = await requestFor(CategoryURL);
     CategoryModel model = CategoryModel.fromJson(json.decode(response.data));
-    return model;
+    return model; 
   }
 
-  // Future
 }

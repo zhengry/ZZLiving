@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:zz_living/pages/category/left_category.dart';
 import 'package:zz_living/provides/category_provide.dart';
-import 'package:zz_living/pages/category/sub_category.dart';
 import 'package:zz_living/provides/category_goods_provide.dart';
 import 'goods_list.dart';
+import 'sub_category_tab.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key key}) : super(key: key);
@@ -15,8 +15,8 @@ class CategoryPage extends StatelessWidget {
     Provide.value<CategoryProvide>(context).loadCategoryList();
 
     return Provide<CategoryProvide>(builder: (context, child, provide) {
-      var categoryId = provide.currentMallCategoryId;
-      var subCategoryId = provide.currentSubCategoryId;
+      var categoryId = provide.selectedCategoryId;
+      var subCategoryId = provide.selectedSubCategoryId;
       Provide.value<CategoryGoodsProvide>(context).changeCategoryId(categoryId);
       Provide.value<CategoryGoodsProvide>(context)
           .changeSubCategoryId(subCategoryId);
@@ -28,15 +28,13 @@ class CategoryPage extends StatelessWidget {
                 children: <Widget>[
                   LeftCategory(
                       categoryList: provide.categoryList,
-                      selectId: provide.currentMallCategoryId),
+                      selectId: provide.selectedCategoryId),
+                  
                   Expanded(
                     child: Column(
                     children: <Widget>[
-                      SubCategoryWidget(
-                          subCategoryList: provide
-                              .categoryList[provide.selectedIndex].bxMallSubDto,
-                          selectedId: provide.currentSubCategoryId),
-      
+                      SubCategoryTab(subCategories: provide.subCategoryList,
+                      selectedIndex: provide.subCategoryIndex),
                       Provide<CategoryGoodsProvide>(builder: (context,child,goodsProvide){
                         if (goodsProvide.goodsList.length > 0) {
                           return GoodsListView(goodsList: Provide.value<CategoryGoodsProvide>(context).goodsList);
