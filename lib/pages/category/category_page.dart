@@ -12,7 +12,10 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provide.value<CategoryProvide>(context).loadCategoryList();
+    // 加判断，防止页面进入详情页后返回时页面重新加载
+    if (Provide.value<CategoryProvide>(context).categoryList == null) {
+      Provide.value<CategoryProvide>(context).loadCategoryList();
+    } 
 
     return Provide<CategoryProvide>(builder: (context, child, provide) {
       var categoryId = provide.selectedCategoryId;
