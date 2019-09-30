@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:zz_living/models/category_goods.dart';
+import 'package:zz_living/models/category_goods_model.dart';
 import 'package:zz_living/network/network.dart';
 import 'dart:convert';
 

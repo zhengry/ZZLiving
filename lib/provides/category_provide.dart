@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:zz_living/models/category_model.dart';
 import 'package:zz_living/network/network.dart';
 import 'dart:convert';
-import 'package:zz_living/models/category_goods.dart';
+
 
 class CategoryProvide with ChangeNotifier {
   
@@ -33,9 +33,9 @@ class CategoryProvide with ChangeNotifier {
   }
 
   void selectCategoryIndex(int index){
-    if (index == _categoryIndex) {
-      return;
-    }
+    // if (index == _categoryIndex) {
+    //   return;
+    // }
     CategoryData category = _categoryList[index];
     _categoryIndex = index;
     _subCategoryIndex = 0;
@@ -47,9 +47,9 @@ class CategoryProvide with ChangeNotifier {
   }
 
   void selectSubCategoryIndex(int index){
-    if (index == _subCategoryIndex) {
-      return;
-    }
+    // if (index == _subCategoryIndex) {
+    //   return;
+    // }
     _subCategoryIndex = index;
     CategoryData category = _categoryList[_categoryIndex];
     _currentSubCategoryId = category.bxMallSubDto[_subCategoryIndex].mallSubId;
