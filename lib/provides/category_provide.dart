@@ -60,6 +60,10 @@ class CategoryProvide with ChangeNotifier {
 
   Future<CategoryModel> _loadCategories() async {
     Response response = await requestFor(CategoryURL);
+    if (response == null) {
+      print('category 数据为空');
+      return null;
+    }
     CategoryModel model = CategoryModel.fromJson(json.decode(response.data));
     return model; 
   }

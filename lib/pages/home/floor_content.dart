@@ -14,7 +14,7 @@ class FloorTitle extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12.0)));
   }
 }
-
+// 楼层商品 上方一个海报图，下方一组商品
 class FloorContent extends StatelessWidget {
   final List<Floor> floorContent;
 

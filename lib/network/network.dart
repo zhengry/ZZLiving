@@ -20,9 +20,11 @@ Future<Response> requestFor(String url,{Map paras}) async {
       response = await dio.post(url, data: paras);
     }
     if (response.statusCode == 200) {
+      print(response.data);
       return response;
     } else {
-      throw Exception('Net Error');
+      print('network error');
+      return null;
     }
   } catch (e) {
     print('ERROR: $e');

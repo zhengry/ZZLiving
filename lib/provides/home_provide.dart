@@ -22,6 +22,10 @@ class HomeProvide with ChangeNotifier {
   Future<HomePageModel> _getHomePageContent() async {
     Map paras = {'lon': '115.02932', 'lat': '35.76189'};
     var response = await requestFor(HomeURL,paras: paras);
+    // if (response.data == null) {
+    //   print('加载首页数据为空');
+    //   return null;
+    // }
     return HomePageModel.fromJson(json.decode(response.data));
   }
 

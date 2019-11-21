@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
+import 'package:zz_living/pages/detail/goods_description.dart';
 import 'package:zz_living/provides/goods_detail_provide.dart';
+import 'goods_top_widget.dart';
+import 'goods_detail_tab.dart';
 
 class GoodsDetailPage extends StatelessWidget {
   final arguments;
@@ -21,7 +24,9 @@ class GoodsDetailPage extends StatelessWidget {
             ? Center(child: Text('加载中'))
             : ListView(
               children: <Widget>[
-                _goodsImage(provide.goodsDetail.goodInfo.image1, provide.goodsDetail.goodInfo.goodsName, provide.goodsDetail.goodInfo.presentPrice)
+                GoodsTopWidget(goodsInfo: provide.goodsDetail.goodInfo),
+                GoodsDescriptionWidget(),
+                GoodsDetailTab(),
               ],
             ),
       );
@@ -29,18 +34,5 @@ class GoodsDetailPage extends StatelessWidget {
 
   }
 
-  Widget _goodsImage(String imageUrl,String name,double price){
-    return Container(
-      padding: EdgeInsets.only(left: 10,right: 10),
-      child: Column(
-        children: <Widget>[
-          Image.network(imageUrl,height: 300,),
-          Text(name,style:TextStyle(
-            fontSize:16,
-          )),
-          Text('￥$price'),
-        ],
-      ),
-    );
-  }
+ 
 }
