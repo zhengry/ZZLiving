@@ -18,9 +18,10 @@ class HomeRecommend extends StatelessWidget {
   }
 
   Widget _recommendItem(BuildContext context,int index){
+    final item = recommendList[index];
     return InkWell(
       onTap: (){
-
+        Navigator.pushNamed(context, '/detail',arguments:{'id':item.goodsId});
       },
       child: Container(
         alignment: Alignment.topCenter,
@@ -37,9 +38,9 @@ class HomeRecommend extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.network(recommendList[index].image,height: 120,),
-            Text('￥${recommendList[index].mallPrice}',
+            Text('￥${item.mallPrice}',
                   style: TextStyle(fontSize: 16.0)),
-              Text('￥${recommendList[index].price}',
+              Text('￥${item.price}',
                   style: TextStyle(
                       decoration: TextDecoration.lineThrough,
                       decorationColor: Colors.black45))
