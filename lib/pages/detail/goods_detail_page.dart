@@ -6,6 +6,7 @@ import 'package:zz_living/pages/detail/goods_description.dart';
 import 'package:zz_living/provides/goods_detail_provide.dart';
 import 'goods_top_widget.dart';
 import 'goods_detail_tab.dart';
+import 'goods_detail_web.dart';
 
 class GoodsDetailPage extends StatelessWidget {
   final arguments;
@@ -27,6 +28,7 @@ class GoodsDetailPage extends StatelessWidget {
                 GoodsTopWidget(goodsInfo: provide.goodsDetail.goodInfo),
                 GoodsDescriptionWidget(),
                 GoodsDetailTab(),
+                GoodsDetailWeb(),
               ],
             ),
       );

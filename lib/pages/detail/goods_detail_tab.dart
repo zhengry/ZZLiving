@@ -30,6 +30,11 @@ class GoodsDetailTab extends StatelessWidget {
         padding: EdgeInsets.all(10),
         alignment: Alignment.center,
         width: MediaQuery.of(context).size.width * 0.5,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 3,color: isSelected ? Colors.redAccent : Colors.white10)
+          )
+        ),
         child: Text(title,style:TextStyle(
           fontSize: 18,
           color:isSelected ? Colors.redAccent : Colors.black87
