@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zz_living/models/shopping_cart_model.dart';
 import 'package:zz_living/models/goods_detail_model.dart';
-import 'package:provide/provide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -13,25 +12,21 @@ class CartProvide with ChangeNotifier {
   int _allCheckedCount = 0; //购物车选中商品数量
   double _allCheckedPrice = 0.0; //所有选中商品价格
 
-
-
+  List<ShoppingCartModel> get shoppingCarts => _cartList;
+  bool get allChecked => _isAllChecked;
+  int get cartCount => _allCartCount;
+  int get checkedCount => _allCheckedCount;
+  double get checkPrice => _allCheckedPrice;
 
   // 添加商品到购物车
-  void addToCart(GoodInfoBean model, int count) async {
+   addToCart(GoodInfoBean model, int count) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _cartListString = prefs.getString('cartInfo');
     List<dynamic> carts = _cartListString == null ? '[]' : json.decode(_cartListString);
 
     bool isInclude = false;
     int index = 0;
-    // carts.forEach((item){
-    //   if (item['goodsId'] == model.goodsId) {
-    //     print('添加了同一个商品');
-    //     item['count'] += count;
-    //     isInclude = true;
-    //   }
-    //   index++;
-    // });
+
     while (isInclude == false && index < carts.length) {
       var item = carts[index];
       if (item['goodsId'] == model.goodsId) {
@@ -55,7 +50,7 @@ class CartProvide with ChangeNotifier {
     _notifyChange(carts);
   }
 
-  void _notifyChange(List carts) async {
+   _notifyChange(List carts) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('cartInfo', json.encode(carts));
     _cartListString = json.encode(carts);
@@ -66,7 +61,7 @@ class CartProvide with ChangeNotifier {
     notifyListeners();
   }
 // 修改数量和选中状态
-  void _changeCartStatus(){
+   _changeCartStatus(){
     _allCartCount = 0;
     _allCheckedCount = 0;
     _allCheckedPrice = 0;
@@ -92,10 +87,25 @@ class CartProvide with ChangeNotifier {
 
 // 清除某一个商品
   clearGoods(String goodsId){
-
+    
   }
 
+  // 获取购物车信息
+  getCartInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _cartListString = prefs.getString('cartInfo');
+    _cartList = [];
+    List<dynamic> carts = _cartListString == null ? '[]' : json.decode(_cartListString);
+    _notifyChange(carts);
+    // if (_cartListString == null) {
+    //   _cartListString = '[]';
+    //   _cartList = [];
+    // }else {
+      
+    // }
+  }
 
+  
 
 
 
