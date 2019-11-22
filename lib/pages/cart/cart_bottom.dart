@@ -16,15 +16,15 @@ class CartBottom extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: <Widget>[
-          _allCheckedBtn(provide.allChecked),
+          _allCheckedBtn(context,provide.allChecked),
           _allPriceArea(provide.checkPrice),
-          _settleBtn(provide.cartCount)
+          _settleBtn(provide.checkedCount)
         ],
       ),
     );
   }
 
-  Widget _allCheckedBtn(bool isChecked){
+  Widget _allCheckedBtn(BuildContext context,bool isChecked){
     return Container(
       child: Row(
         children: <Widget>[
@@ -32,7 +32,7 @@ class CartBottom extends StatelessWidget {
             value: isChecked,
             activeColor: Colors.redAccent,
             onChanged: (bool checked){
-              
+              Provide.value<CartProvide>(context).changeAllCheckedStatus(checked);
             },
           ),
           Text('全选')
@@ -78,18 +78,7 @@ class CartBottom extends StatelessWidget {
       ),
     );
 
-    // return Container(
-    //     width: 100,
-    //     height: 60,
-    //     alignment: Alignment.center,
-    //     // color: Colors.redAccent,
-    //     decoration: BoxDecoration(
-    //       color: Colors.redAccent,
-    //       borderRadius: BorderRadius.all(Radius.circular(3))
-    //     ),
-    //     child: Text('结算($count)',style: TextStyle(color: Colors.white,fontSize: 16)),
-        
-    //   );
+
   }
   
 }

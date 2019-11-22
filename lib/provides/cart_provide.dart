@@ -86,9 +86,48 @@ class CartProvide with ChangeNotifier {
   }
 
 // 清除某一个商品
-  clearGoods(String goodsId){
-    
+  clearGoods(String goodsId) async {
+    List<dynamic> carts = json.decode(_cartListString);
+    if (carts.isNotEmpty) {
+      carts.removeWhere((item)=>item['goodsId'] == goodsId);
+    }
+    _notifyChange(carts);
   }
+
+  // 修改商品数量
+  changeGoodsCount(String goodsId,bool isIncrease){
+    List<dynamic> carts = json.decode(_cartListString);
+    int changeCount = isIncrease ? 1: -1;
+    carts.forEach((item){
+      if (item['goodsId'] == goodsId) {
+        item['count'] += changeCount;
+      }
+    });
+    // 去掉数量为0的商品
+    carts.removeWhere((item)=>item['count'] == 0);
+    _notifyChange(carts);   
+  }
+
+// 修改全选状态
+  changeAllCheckedStatus(bool isChecked){
+    List<dynamic> carts = json.decode(_cartListString);
+    carts.forEach((item){
+      item['isChecked'] = isChecked;
+    });
+    _notifyChange(carts);
+  }
+
+// 修改某个商品选中状态
+  changeGoodsChecked(String goodsId,bool isChecked){
+    List<dynamic> carts = json.decode(_cartListString);
+    carts.forEach((item){
+      if (item['goodsId'] == goodsId) {
+        item['isChecked'] = isChecked;
+      }
+    });
+    _notifyChange(carts);
+  }
+
 
   // 获取购物车信息
   getCartInfo() async {
@@ -97,12 +136,6 @@ class CartProvide with ChangeNotifier {
     _cartList = [];
     List<dynamic> carts = _cartListString == null ? '[]' : json.decode(_cartListString);
     _notifyChange(carts);
-    // if (_cartListString == null) {
-    //   _cartListString = '[]';
-    //   _cartList = [];
-    // }else {
-      
-    // }
   }
 
   

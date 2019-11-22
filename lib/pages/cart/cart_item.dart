@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 import 'package:zz_living/models/shopping_cart_model.dart';
+import 'package:zz_living/provides/cart_provide.dart';
 
 class CartItem extends StatelessWidget {
   final ShoppingCartModel model;
@@ -13,22 +15,24 @@ class CartItem extends StatelessWidget {
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
       child: Row(
         children: <Widget>[
-          _checkBox(model.isChecked),
+          _checkBox(context,model.goodsId,model.isChecked),
           _goodsImage(model.goodsImg),
-          _goodsName(model.goodsName, model.count),
-          _goodsPrice(model.oriPrice, model.price)
+          _goodsName(context,model.goodsId,model.goodsName, model.count),
+          _goodsPrice(context,model.goodsId,model.oriPrice, model.price,model.count)
           // _goodsCountView(model.count)
         ],
       ),
     );
   }
 
-  Widget _checkBox(bool isChecked) {
+  Widget _checkBox(BuildContext context,String goodsId,bool isChecked) {
     return Container(
       child: Checkbox(
-        value: true,
+        value: isChecked,
         activeColor: Colors.redAccent,
-        onChanged: (bool value) {},
+        onChanged: (bool value) {
+          Provide.value<CartProvide>(context).changeGoodsChecked(goodsId, value);
+        },
       ),
     );
   }
@@ -43,23 +47,22 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Widget _goodsName(String title, int count) {
+  Widget _goodsName(BuildContext context,String goodsId,String title, int count) {
     return Expanded(
       child: Container(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(title, style: TextStyle(color: Colors.black87, fontSize: 15)),
             // 增加数量
-            _goodsCountWidget(count)
+            _goodsCountWidget(context,goodsId,count)
           ],
         ),
       ),
     );
   }
 
-  Widget _goodsCountWidget(int count) {
+  Widget _goodsCountWidget(BuildContext context,String goodsId, int count) {
     return Container(
       width: 80,
       height: 30,
@@ -75,7 +78,9 @@ class CartItem extends StatelessWidget {
               child: InkWell(
                 child: Text('-',
                     style: TextStyle(fontSize: 18, color: Colors.black87)),
-                onTap: () {},
+                onTap: () {
+                  Provide.value<CartProvide>(context).changeGoodsCount(goodsId,false);
+                },
               ),
             ),
           ),
@@ -93,7 +98,9 @@ class CartItem extends StatelessWidget {
               child: InkWell(
                 child: Text('+',
                     style: TextStyle(fontSize: 18, color: Colors.black87)),
-                onTap: () {},
+                onTap: () {
+                  Provide.value<CartProvide>(context).changeGoodsCount(goodsId, true);
+                },
               ),
             ),
           )
@@ -102,7 +109,7 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Widget _goodsPrice(double oriPrice, double price) {
+  Widget _goodsPrice(BuildContext context,String goodsId,double oriPrice, double price,int count) {
     return Container(
       width: 100,
       // color: Colors.orange,
@@ -110,15 +117,17 @@ class CartItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text(
-            '￥$price',
+            '￥${price * count}',
             style: TextStyle(color: Colors.black87, fontSize: 15),
           ),
-          Text('￥$oriPrice',
+          Text('￥${oriPrice * count}',
               style: TextStyle(color: Colors.black38, fontSize: 13)),
           Container(
             child: InkWell(
               child: Icon(Icons.delete_forever),
-              onTap: () {},
+              onTap: () {
+                Provide.value<CartProvide>(context).clearGoods(goodsId);
+              },
             ),
           )
         ],
