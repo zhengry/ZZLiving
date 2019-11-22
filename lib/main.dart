@@ -5,6 +5,7 @@ import 'package:zz_living/provides/home_provide.dart';
 import 'package:zz_living/provides/category_provide.dart';
 import 'package:zz_living/provides/category_goods_provide.dart';
 import 'package:zz_living/provides/goods_detail_provide.dart';
+import 'provides/cart_provide.dart';
 import 'router/routes.dart';
 
 void main() {
@@ -13,7 +14,8 @@ void main() {
     ..provide(Provider.function((_)=>HomeProvide()))
     ..provide(Provider.function((_)=>CategoryProvide()))
     ..provide(Provider.function((_)=>CategoryGoodsProvide()))
-    ..provide(Provider.function((_)=>GoodsDetailProvide()));
+    ..provide(Provider.function((_)=>GoodsDetailProvide()))
+    ..provide(Provider.function((_)=>CartProvide()));
 
 
   runApp(ProviderNode(child: ZZLiving(),providers: providers));
