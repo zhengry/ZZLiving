@@ -4,7 +4,7 @@ import 'package:zz_living/pages/detail/goods_detail_page.dart';
 
 final routes = {
   '/':(context)=>IndexTab(),
-  '/detail':(context,{arguments})=>GoodsDetailPage(arguments: arguments,),
+  '/detail':(context,{arguments})=>GoodsDetailPage(arguments: arguments),
 };
 
 

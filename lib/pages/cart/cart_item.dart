@@ -13,14 +13,18 @@ class CartItem extends StatelessWidget {
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
-      child: Row(
-        children: <Widget>[
-          _checkBox(context,model.goodsId,model.isChecked),
-          _goodsImage(model.goodsImg),
-          _goodsName(context,model.goodsId,model.goodsName, model.count),
-          _goodsPrice(context,model.goodsId,model.oriPrice, model.price,model.count)
-          // _goodsCountView(model.count)
-        ],
+      child: InkWell(
+        onTap: (){
+          Navigator.pushNamed(context, '/detail',arguments:{'id':model.goodsId});
+        },
+        child: Row(
+          children: <Widget>[
+            _checkBox(context,model.goodsId,model.isChecked),
+            _goodsImage(model.goodsImg),
+            _goodsName(context,model.goodsId,model.goodsName, model.count),
+            _goodsPrice(context,model.goodsId,model.oriPrice, model.price,model.count)
+          ],
+      ),
       ),
     );
   }
