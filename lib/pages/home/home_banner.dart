@@ -20,7 +20,7 @@ class HomeBanner extends StatelessWidget {
             return InkWell(
               child: Image.network(bannerImages[index].image,fit: BoxFit.fill,),
               onTap: (){
-
+                Navigator.pushNamed(context, '/detail',arguments:{'id':bannerImages[index].goodsId});
               },
             );
           },

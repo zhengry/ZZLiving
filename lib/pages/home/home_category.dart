@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 import 'package:zz_living/models/home_page_model.dart';
+import 'package:zz_living/provides/tab_index_provide.dart';
 
 class HomeCategoryView extends StatelessWidget {
   final List<Category> categories;
 
   HomeCategoryView({Key key, @required this.categories}) : super(key: key);
 
-  Widget _categoryItem(String imgUrl,String name) {
+  Widget _categoryItem(BuildContext context,String imgUrl,String name) {
     return Container(
               child: InkWell(
+                onTap: (){
+                  Provide.value<TabIndexProvide>(context).changePage(1);
+                },
                 child: Column(
                   children: <Widget>[
                     Image.network(imgUrl,fit: BoxFit.fitWidth,),
@@ -35,7 +40,7 @@ class HomeCategoryView extends StatelessWidget {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             Category item = categories[index];
-            return _categoryItem(item.image, item.mallCategoryName);
+            return _categoryItem(context,item.image, item.mallCategoryName);
           },
         ),
     );

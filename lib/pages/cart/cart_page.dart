@@ -57,8 +57,8 @@ class CartPage extends StatelessWidget {
     // );
   }
 
-  Future<String> _getCartInfo(BuildContext context) async {
-    await Provide.value<CartProvide>(context).getCartInfo();
-    return 'success';
-  }
+  // Future<String> _getCartInfo(BuildContext context) async {
+  //   await Provide.value<CartProvide>(context).getCartInfo();
+  //   return 'success';
+  // }
 }
