@@ -40,34 +40,30 @@ class GoodsBottomTab extends StatelessWidget {
 
   // 购物车按钮
   Widget _shoppingCart(int count,double width, void Function() onTap) {
-    return InkWell(
-      child: Container(
+    return Container(
         width: width,
-        child: Provide<CartProvide>(
-                  builder: (_, child, carts){
-                    return Stack(
-                      children: <Widget>[
-                        Icon(Icons.add_shopping_cart, color: Colors.redAccent,size: 30,),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            child: Text('$count',style: TextStyle(fontSize: 14,color: Colors.white),),
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(15)
-                            ),
-                          ),
-                        )
-                      ],
-                  );
-                  }
-        ),
-      ),
-      onTap: onTap,
+        child: Stack(
+              alignment: Alignment.topRight,
+              children: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.shopping_cart, size: 32.0, color: Colors.redAccent),
+                    onPressed: onTap),
+                Provide<CartProvide>(
+                  builder: (_, child, carts) => DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                        ),
+                        position: DecorationPosition.background,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, left: 6.0, right: 6.0),
+                          child: Text('$count', style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                )
+              ],
+            )
+      
     );
   }
 
