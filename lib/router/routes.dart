@@ -8,9 +8,8 @@ final routes = {
 };
 
 
-var onGenerateRoute = (RouteSettings settings){
-    // 统一处理
-      final String name = settings.name; 
+Route<dynamic> onGenerateRoute(RouteSettings settings){
+    final String name = settings.name; 
       final Function pageContentBuilder = routes[name];
       if (pageContentBuilder != null) {
         if (settings.arguments != null) {
@@ -24,5 +23,7 @@ var onGenerateRoute = (RouteSettings settings){
                   pageContentBuilder(context));
             return route;
         }
+      }else {
+        return null;
       }
-};
+  }

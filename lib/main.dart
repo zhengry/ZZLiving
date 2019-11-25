@@ -34,6 +34,6 @@ class ZZLiving extends StatelessWidget {
       onGenerateRoute: onGenerateRoute,
       debugShowCheckedModeBanner: false,
     );
-  }
+  }  
 }
 

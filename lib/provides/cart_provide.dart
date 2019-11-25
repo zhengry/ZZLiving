@@ -30,7 +30,6 @@ class CartProvide with ChangeNotifier {
     while (isInclude == false && index < carts.length) {
       var item = carts[index];
       if (item['goodsId'] == model.goodsId) {
-        print('添加了同一个商品');
         item['count'] += count;
         isInclude = true;
       }
@@ -54,7 +53,7 @@ class CartProvide with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('cartInfo', json.encode(carts));
     _cartListString = json.encode(carts);
-    print(_cartListString);
+    // print(_cartListString);
     _cartList.clear();
     _cartList.addAll(carts.isEmpty ? [] : ShoppingCartModel.fromJsonList(carts));
     _changeCartStatus();
