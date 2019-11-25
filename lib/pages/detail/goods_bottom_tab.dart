@@ -13,7 +13,6 @@ class GoodsBottomTab extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var goodsInfo = Provide.value<GoodsDetailProvide>(context).goodsDetail.goodInfo;
-    var cartCount = Provide.value<CartProvide>(context).cartCount;
     final double _cartWidth = 80;
     final double _btnWidth = (MediaQuery.of(context).size.width - _cartWidth) * 0.5;
     return Container(
@@ -22,7 +21,7 @@ class GoodsBottomTab extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: <Widget>[
-          _shoppingCart(cartCount,_cartWidth, () {
+          _shoppingCart(_cartWidth, () {
             // 跳转到购物车
             Navigator.pop(context);
             Provide.value<TabIndexProvide>(context).changePage(2);
@@ -39,7 +38,8 @@ class GoodsBottomTab extends StatelessWidget {
   }
 
   // 购物车按钮
-  Widget _shoppingCart(int count,double width, void Function() onTap) {
+  Widget _shoppingCart(double width, void Function() onTap) {
+    
     return Container(
         width: width,
         child: Stack(
@@ -57,7 +57,7 @@ class GoodsBottomTab extends StatelessWidget {
                         position: DecorationPosition.background,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, left: 6.0, right: 6.0),
-                          child: Text('$count', style: TextStyle(color: Colors.white)),
+                          child: Text('${carts.cartCount}', style: TextStyle(color: Colors.white)),
                         ),
                       ),
                 )
