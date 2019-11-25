@@ -11,7 +11,7 @@ class GoodsBottomTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    Provide.value<CartProvide>(context).getCartInfo();
     var goodsInfo = Provide.value<GoodsDetailProvide>(context).goodsDetail.goodInfo;
     final double _cartWidth = 80;
     final double _btnWidth = (MediaQuery.of(context).size.width - _cartWidth) * 0.5;

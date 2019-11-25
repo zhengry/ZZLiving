@@ -8,7 +8,7 @@ class SubCategoryWidget extends StatelessWidget {
 
   final List<BxMallSubDto> subCategoryList;
   final String selectedId;
-  // ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
   SubCategoryWidget({Key key,this.subCategoryList,this.selectedId}) : super(key: key);
 
   Widget _itemForSubCategory(BuildContext context, BxMallSubDto category,int index){
@@ -50,7 +50,7 @@ class SubCategoryWidget extends StatelessWidget {
           var category = subCategoryList[index];
           return _itemForSubCategory(context, category,index);
         },
-      ),
+      )
     );
   }
 }

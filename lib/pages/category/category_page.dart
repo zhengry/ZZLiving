@@ -37,8 +37,7 @@ class CategoryPage extends StatelessWidget {
                     child: Column(
                     children: <Widget>[
                       SubCategoryWidget(subCategoryList: provide.subCategoryList,selectedId: provide.selectedSubCategoryId,),
-                      // SubCategoryTab2(subCategories: provide.subCategoryList,
-                      // selectedIndex: provide.subCategoryIndex),
+                      
                       Provide<CategoryGoodsProvide>(builder: (context,child,goodsProvide){
                         if (goodsProvide.goodsList.length > 0) {
                           return GoodsListView(goodsList: Provide.value<CategoryGoodsProvide>(context).goodsList);
