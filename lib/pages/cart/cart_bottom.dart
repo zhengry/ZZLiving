@@ -12,7 +12,7 @@ class CartBottom extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       color: Colors.white,
-      height: 80,
+      height: 70,
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: <Widget>[

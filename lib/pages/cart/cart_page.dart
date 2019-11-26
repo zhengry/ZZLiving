@@ -17,48 +17,28 @@ class CartPage extends StatelessWidget {
         appBar: AppBar(title: Text('购物车')),
         body: provide.shoppingCarts.isEmpty
             ? Center(child: Text('加载中'))
-            : Stack(
-              children: <Widget>[
-                CartListView(cartList: provide.shoppingCarts),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  child: CartBottom(),
-                )
-              ],
-            ) 
+            // : Stack(
+            //   children: <Widget>[
+            //     CartListView(cartList: provide.shoppingCarts),
+            //     Positioned(
+            //       bottom: 0,
+            //       left: 0,
+            //       child: CartBottom(),
+            //     )
+            //   ],
+            // ) 
+            : Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: CartListView(cartList: provide.shoppingCarts,),
+                  ),
+                  CartBottom()
+                ],
+              ),
+            )
       );
     });
-    // return Scaffold(
-    //   appBar: AppBar(title: Text('购物车')),
-    //   body: FutureBuilder(
-    //     future: _getCartInfo(context),
-    //     builder: (context,snapshot){
-    //       if (snapshot.hasData) {
-    //         List cartList = Provide.value<CartProvide>(context).shoppingCarts;
-    //         return Stack(
-    //           children: <Widget>[
-    //             CartListView(cartList: cartList),
-    //             Positioned(
-    //               bottom: 0,
-    //               left: 0,
-    //               child: CartBottom(),
-    //             )
-    //           ],
-    //         );
-    //       }else {
-    //         return Container(
-    //           alignment: Alignment.center,
-    //           child: Text('加载中...'),
-    //         );
-    //       }
-    //     },
-    //   ),
-    // );
   }
-
-  // Future<String> _getCartInfo(BuildContext context) async {
-  //   await Provide.value<CartProvide>(context).getCartInfo();
-  //   return 'success';
-  // }
 }
