@@ -15,7 +15,7 @@ class CategoryPage extends StatelessWidget {
     // 加判断，防止页面进入详情页后返回时页面重新加载
     if (Provide.value<CategoryProvide>(context).categoryList == null) {
       Provide.value<CategoryProvide>(context).loadCategoryList();
-    } 
+    }
 
     return Provide<CategoryProvide>(builder: (context, child, provide) {
       var categoryId = provide.selectedCategoryId;
@@ -32,23 +32,28 @@ class CategoryPage extends StatelessWidget {
                   LeftCategory(
                       categoryList: provide.categoryList,
                       selectId: provide.selectedCategoryId),
-                  
                   Expanded(
                     child: Column(
-                    children: <Widget>[
-                      SubCategoryWidget(subCategoryList: provide.subCategoryList,selectedId: provide.selectedSubCategoryId,),
-                      
-                      Provide<CategoryGoodsProvide>(builder: (context,child,goodsProvide){
-                        if (goodsProvide.goodsList.length > 0) {
-                          return GoodsListView(goodsList: Provide.value<CategoryGoodsProvide>(context).goodsList);
-                        }else {
-                          return Center(
-                            child: Text('暂无数据'),
-                          );
-                        }
-                      }),
-                    ],
-                  ),
+                      children: <Widget>[
+                        SubCategoryWidget(
+                          subCategoryList: provide.subCategoryList,
+                          selectedId: provide.selectedSubCategoryId,
+                        ),
+                        Provide<CategoryGoodsProvide>(
+                            builder: (context, child, goodsProvide) {
+                          if (goodsProvide.goodsList.length > 0) {
+                            return GoodsListView(
+                                goodsList:
+                                    Provide.value<CategoryGoodsProvide>(context)
+                                        .goodsList);
+                          } else {
+                            return Center(
+                              child: Text('暂无数据'),
+                            );
+                          }
+                        }),
+                      ],
+                    ),
                   )
                 ],
               ),

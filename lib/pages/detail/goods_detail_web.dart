@@ -18,9 +18,7 @@ class GoodsDetailWeb extends StatelessWidget {
     var isLeft = Provide.value<GoodsDetailProvide>(context).isLeft;
     if (isLeft) {
       //详情web页面
-      return Container(
-        child: Html(data: goodsDetail)
-      );
+      return Container(child: Html(data: goodsDetail));
     } else {
       return _commentListView(comments);
     }
@@ -44,7 +42,7 @@ class GoodsDetailWeb extends StatelessWidget {
   }
 
 // 每条评论
-  Widget _commentItem(GoodCommentsListBean comment){
+  Widget _commentItem(GoodCommentsListBean comment) {
     return Container(
       child: Column(
         children: <Widget>[

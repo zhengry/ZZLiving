@@ -19,10 +19,11 @@ class CartProvide with ChangeNotifier {
   double get checkPrice => _allCheckedPrice;
 
   // 添加商品到购物车
-   addToCart(GoodInfoBean model, int count) async {
+  addToCart(GoodInfoBean model, int count) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _cartListString = prefs.getString('cartInfo');
-    List<dynamic> carts = _cartListString == null ? '[]' : json.decode(_cartListString);
+    List<dynamic> carts =
+        _cartListString == null ? '[]' : json.decode(_cartListString);
 
     bool isInclude = false;
     int index = 0;
@@ -37,40 +38,42 @@ class CartProvide with ChangeNotifier {
     }
     if (!isInclude) {
       carts.add({
-        'goodsName':model.goodsName,
-        'goodsId':model.goodsId,
-        'goodsImg':model.image1,
-        'oriPrice':model.oriPrice,
-        'price':model.presentPrice,
-        'count':count,
-        'isChecked':true,
+        'goodsName': model.goodsName,
+        'goodsId': model.goodsId,
+        'goodsImg': model.image1,
+        'oriPrice': model.oriPrice,
+        'price': model.presentPrice,
+        'count': count,
+        'isChecked': true,
       });
     }
     _notifyChange(carts);
   }
 
-   _notifyChange(List carts) async {
+  _notifyChange(List carts) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('cartInfo', json.encode(carts));
     _cartListString = json.encode(carts);
     // print(_cartListString);
     _cartList.clear();
-    _cartList.addAll(carts.isEmpty ? [] : ShoppingCartModel.fromJsonList(carts));
+    _cartList
+        .addAll(carts.isEmpty ? [] : ShoppingCartModel.fromJsonList(carts));
     _changeCartStatus();
     notifyListeners();
   }
+
 // 修改数量和选中状态
-   _changeCartStatus(){
+  _changeCartStatus() {
     _allCartCount = 0;
     _allCheckedCount = 0;
     _allCheckedPrice = 0;
     _isAllChecked = true;
 
-    _cartList.forEach((item){
+    _cartList.forEach((item) {
       _allCartCount += item.count;
       if (!item.isChecked) {
         _isAllChecked = false;
-      }else {
+      } else {
         _allCheckedCount += item.count;
         _allCheckedPrice += (item.count * item.price);
       }
@@ -88,38 +91,38 @@ class CartProvide with ChangeNotifier {
   clearGoods(String goodsId) async {
     List<dynamic> carts = json.decode(_cartListString);
     if (carts.isNotEmpty) {
-      carts.removeWhere((item)=>item['goodsId'] == goodsId);
+      carts.removeWhere((item) => item['goodsId'] == goodsId);
     }
     _notifyChange(carts);
   }
 
   // 修改商品数量
-  changeGoodsCount(String goodsId,bool isIncrease){
+  changeGoodsCount(String goodsId, bool isIncrease) {
     List<dynamic> carts = json.decode(_cartListString);
-    int changeCount = isIncrease ? 1: -1;
-    carts.forEach((item){
+    int changeCount = isIncrease ? 1 : -1;
+    carts.forEach((item) {
       if (item['goodsId'] == goodsId) {
         item['count'] += changeCount;
       }
     });
     // 去掉数量为0的商品
-    carts.removeWhere((item)=>item['count'] == 0);
-    _notifyChange(carts);   
+    carts.removeWhere((item) => item['count'] == 0);
+    _notifyChange(carts);
   }
 
 // 修改全选状态
-  changeAllCheckedStatus(bool isChecked){
+  changeAllCheckedStatus(bool isChecked) {
     List<dynamic> carts = json.decode(_cartListString);
-    carts.forEach((item){
+    carts.forEach((item) {
       item['isChecked'] = isChecked;
     });
     _notifyChange(carts);
   }
 
 // 修改某个商品选中状态
-  changeGoodsChecked(String goodsId,bool isChecked){
+  changeGoodsChecked(String goodsId, bool isChecked) {
     List<dynamic> carts = json.decode(_cartListString);
-    carts.forEach((item){
+    carts.forEach((item) {
       if (item['goodsId'] == goodsId) {
         item['isChecked'] = isChecked;
       }
@@ -127,18 +130,13 @@ class CartProvide with ChangeNotifier {
     _notifyChange(carts);
   }
 
-
   // 获取购物车信息
   getCartInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _cartListString = prefs.getString('cartInfo');
     _cartList = [];
-    List<dynamic> carts = _cartListString == null ? '[]' : json.decode(_cartListString);
+    List<dynamic> carts =
+        _cartListString == null ? '[]' : json.decode(_cartListString);
     _notifyChange(carts);
   }
-
-  
-
-
-
 }

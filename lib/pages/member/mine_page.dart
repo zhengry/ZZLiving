@@ -27,8 +27,9 @@ class MinePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               border:
-                // Color(int) 16进制色值前两位表示透明度（00~FF)
-                  Border(bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
+                  // Color(int) 16进制色值前两位表示透明度（00~FF)
+                  Border(
+                      bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
           child: Stack(alignment: Alignment.center, children: <Widget>[
             Image.network(
                 'https://c-ssl.duitang.com/uploads/item/201702/21/20170221003606_HG3xS.thumb.700_0.jpeg',
@@ -51,7 +52,8 @@ class MinePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
+          border:
+              Border(bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -94,14 +96,14 @@ class MinePage extends StatelessWidget {
 
   Widget _listItem(BuildContext context, Icon icon, String title) {
     return Column(
-        children: <Widget>[
-          ListTile(
-            leading: icon,
-            title: Text(title),
-            trailing: Icon(Icons.chevron_right),
-          ),
-          Divider()
-        ],
-      );
+      children: <Widget>[
+        ListTile(
+          leading: icon,
+          title: Text(title),
+          trailing: Icon(Icons.chevron_right),
+        ),
+        Divider()
+      ],
+    );
   }
 }

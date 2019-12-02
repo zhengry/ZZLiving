@@ -15,7 +15,9 @@ class LeftCategory extends StatelessWidget {
     return Container(
       width: 80,
       decoration: BoxDecoration(
-          border: Border(right: BorderSide(width: 1.0, color: Colors.black12))),
+        border: Border(right: BorderSide(width: 1.0, color: Colors.black12)
+                )
+      ),
       child: ListView.builder(
         itemCount: categoryList.length,
         itemBuilder: (context, index) {
@@ -38,8 +40,10 @@ class LeftCategory extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Provide.value<CategoryProvide>(context).selectCategoryIndex(index);
-          var categoryId = Provide.value<CategoryProvide>(context).selectedCategoryId;
-          var subCategoryId = Provide.value<CategoryProvide>(context).selectedSubCategoryId;
+          var categoryId =
+              Provide.value<CategoryProvide>(context).selectedCategoryId;
+          var subCategoryId =
+              Provide.value<CategoryProvide>(context).selectedSubCategoryId;
           Provide.value<CategoryGoodsProvide>(context)
             ..changeCategoryId(categoryId)
             ..changeSubCategoryId(subCategoryId);

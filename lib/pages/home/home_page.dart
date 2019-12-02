@@ -22,18 +22,40 @@ class HomePage extends StatelessWidget {
               ? CupertinoActivityIndicator(radius: 20)
               : ListView(
                   children: <Widget>[
-                    HomeBanner(bannerImages: homeProvide.homeModel.data.slides),
-                    HomeCategoryView(categories: homeProvide.homeModel.data.category),
-                    AdBanner(bannerImage: homeProvide.homeModel.data.advertesPicture.pICTUREADDRESS),
-                    LeaderPhone(image: homeProvide.homeModel.data.shopInfo.leaderImage,mobile: homeProvide.homeModel.data.shopInfo.leaderPhone),
-                    HomeRecommend(recommendList: homeProvide.homeModel.data.recommend,),
-                    
-                    FloorTitle(floorPic: homeProvide.homeModel.data.floor1Pic.pICTUREADDRESS),FloorContent(floorContent: homeProvide.homeModel.data.floor1),
-                    
-                    FloorTitle(floorPic: homeProvide.homeModel.data.floor2Pic.pICTUREADDRESS),FloorContent(floorContent: homeProvide.homeModel.data.floor2),
-                    
-                    FloorTitle(floorPic: homeProvide.homeModel.data.floor3Pic.pICTUREADDRESS),FloorContent(floorContent: homeProvide.homeModel.data.floor3),
-                    
+                    HomeBanner(
+                      bannerImages: homeProvide.homeModel.data.slides
+                    ),
+                    HomeCategoryView(
+                        categories: homeProvide.homeModel.data.category
+                    ),
+                    AdBanner(
+                        bannerImage: homeProvide.homeModel.data.advertesPicture.pICTUREADDRESS
+                    ),
+                    LeaderPhone(
+                        image: homeProvide.homeModel.data.shopInfo.leaderImage,
+                        mobile: homeProvide.homeModel.data.shopInfo.leaderPhone
+                    ),
+                    HomeRecommend(
+                      recommendList: homeProvide.homeModel.data.recommend,
+                    ),
+                    FloorTitle(
+                      floorPic: homeProvide.homeModel.data.floor1Pic.pICTUREADDRESS
+                    ),
+                    FloorContent(
+                      floorContent: homeProvide.homeModel.data.floor1
+                    ),
+                    FloorTitle(
+                      floorPic: homeProvide.homeModel.data.floor2Pic.pICTUREADDRESS
+                    ),
+                    FloorContent(
+                      floorContent: homeProvide.homeModel.data.floor2
+                    ),
+                    FloorTitle(
+                        floorPic: homeProvide.homeModel.data.floor3Pic.pICTUREADDRESS
+                    ),
+                    FloorContent(
+                        floorContent: homeProvide.homeModel.data.floor3
+                    ),
                   ],
                 ));
     });

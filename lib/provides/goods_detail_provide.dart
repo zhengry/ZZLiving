@@ -1,11 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:zz_living/models/goods_detail_model.dart';
 import 'package:zz_living/network/network.dart';
 import 'dart:convert';
-
-
-
 
 class GoodsDetailProvide with ChangeNotifier {
   GoodsDetailInfo _goodsDetail;
@@ -20,11 +16,6 @@ class GoodsDetailProvide with ChangeNotifier {
   void changeTab(bool isLeft) {
     _tabIsLeft = isLeft;
     _tabIsRight = !isLeft;
-    if (isLeft) {
-      
-    } else {
-
-    }
     notifyListeners();
   }
 
@@ -33,15 +24,14 @@ class GoodsDetailProvide with ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<GoodsDetailInfo> _loadGoods(String id) async{
-    var response = await requestFor(GoodsDetailURL,paras:{'goodId':id});
+  Future<GoodsDetailInfo> _loadGoods(String id) async {
+    var response = await requestFor(GoodsDetailURL, paras: {'goodId': id});
     if (response == null) {
       print('商品数据为空');
       return null;
     }
-    GoodsDetailModel model = GoodsDetailModel.fromMap(json.decode(response.data));
+    GoodsDetailModel model =
+        GoodsDetailModel.fromMap(json.decode(response.data));
     return model.data;
   }
-  
 }

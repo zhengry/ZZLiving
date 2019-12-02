@@ -14,6 +14,7 @@ class FloorTitle extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12.0)));
   }
 }
+
 // 楼层商品 上方一个海报图，下方一组商品
 class FloorContent extends StatelessWidget {
   final List<Floor> floorContent;
@@ -25,7 +26,8 @@ class FloorContent extends StatelessWidget {
         child: Image.network(floorItem.image,
             width: MediaQuery.of(context).size.width / 2),
         onTap: () {
-          Navigator.pushNamed(context, '/detail',arguments: {'id':floorItem.goodsId});
+          Navigator.pushNamed(context, '/detail',
+              arguments: {'id': floorItem.goodsId});
         });
   }
 
@@ -43,13 +45,11 @@ class FloorContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Column(children: <Widget>[
-          _topRow(context),
-          Row(children: <Widget>[
-            _goodsImg(floorContent[3], context),
-            _goodsImg(floorContent[4], context),
-          ])
-        ]
-      )
-    );
+      _topRow(context),
+      Row(children: <Widget>[
+        _goodsImg(floorContent[3], context),
+        _goodsImg(floorContent[4], context),
+      ])
+    ]));
   }
 }

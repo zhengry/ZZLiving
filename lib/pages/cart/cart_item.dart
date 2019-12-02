@@ -14,28 +14,31 @@ class CartItem extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 1, color: Colors.black12))),
       child: InkWell(
-        onTap: (){
-          Navigator.pushNamed(context, '/detail',arguments:{'id':model.goodsId});
+        onTap: () {
+          Navigator.pushNamed(context, '/detail',
+              arguments: {'id': model.goodsId});
         },
         child: Row(
           children: <Widget>[
-            _checkBox(context,model.goodsId,model.isChecked),
+            _checkBox(context, model.goodsId, model.isChecked),
             _goodsImage(model.goodsImg),
-            _goodsName(context,model.goodsId,model.goodsName, model.count),
-            _goodsPrice(context,model.goodsId,model.oriPrice, model.price,model.count)
+            _goodsName(context, model.goodsId, model.goodsName, model.count),
+            _goodsPrice(context, model.goodsId, model.oriPrice, model.price,
+                model.count)
           ],
-      ),
+        ),
       ),
     );
   }
 
-  Widget _checkBox(BuildContext context,String goodsId,bool isChecked) {
+  Widget _checkBox(BuildContext context, String goodsId, bool isChecked) {
     return Container(
       child: Checkbox(
         value: isChecked,
         activeColor: Colors.redAccent,
         onChanged: (bool value) {
-          Provide.value<CartProvide>(context).changeGoodsChecked(goodsId, value);
+          Provide.value<CartProvide>(context)
+              .changeGoodsChecked(goodsId, value);
         },
       ),
     );
@@ -51,7 +54,8 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Widget _goodsName(BuildContext context,String goodsId,String title, int count) {
+  Widget _goodsName(
+      BuildContext context, String goodsId, String title, int count) {
     return Expanded(
       child: Container(
         child: Column(
@@ -59,14 +63,14 @@ class CartItem extends StatelessWidget {
           children: <Widget>[
             Text(title, style: TextStyle(color: Colors.black87, fontSize: 15)),
             // 增加数量
-            _goodsCountWidget(context,goodsId,count)
+            _goodsCountWidget(context, goodsId, count)
           ],
         ),
       ),
     );
   }
 
-  Widget _goodsCountWidget(BuildContext context,String goodsId, int count) {
+  Widget _goodsCountWidget(BuildContext context, String goodsId, int count) {
     return Container(
       width: 80,
       height: 30,
@@ -83,7 +87,8 @@ class CartItem extends StatelessWidget {
                 child: Text('-',
                     style: TextStyle(fontSize: 18, color: Colors.black87)),
                 onTap: () {
-                  Provide.value<CartProvide>(context).changeGoodsCount(goodsId,false);
+                  Provide.value<CartProvide>(context)
+                      .changeGoodsCount(goodsId, false);
                 },
               ),
             ),
@@ -103,7 +108,8 @@ class CartItem extends StatelessWidget {
                 child: Text('+',
                     style: TextStyle(fontSize: 18, color: Colors.black87)),
                 onTap: () {
-                  Provide.value<CartProvide>(context).changeGoodsCount(goodsId, true);
+                  Provide.value<CartProvide>(context)
+                      .changeGoodsCount(goodsId, true);
                 },
               ),
             ),
@@ -113,7 +119,8 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Widget _goodsPrice(BuildContext context,String goodsId,double oriPrice, double price,int count) {
+  Widget _goodsPrice(BuildContext context, String goodsId, double oriPrice,
+      double price, int count) {
     return Container(
       width: 100,
       // color: Colors.orange,

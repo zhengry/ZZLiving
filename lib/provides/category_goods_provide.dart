@@ -14,7 +14,7 @@ class CategoryGoodsProvide with ChangeNotifier {
   String get subCategoryId => _subCategoryId;
   int get page => _page;
   List<CategoryGoodsDetail> get goodsList => _goodsList;
-  
+
   void changeCategoryId(String id) {
     if (_categoryId == id && _goodsList.isNotEmpty) {
       return;
@@ -26,7 +26,6 @@ class CategoryGoodsProvide with ChangeNotifier {
       loadGoodsList();
       notifyListeners();
     }
-    
   }
 
   void changeSubCategoryId(String id) {
@@ -40,7 +39,6 @@ class CategoryGoodsProvide with ChangeNotifier {
       loadGoodsList();
       notifyListeners();
     }
-    
   }
 
   void loadGoodsList() async {
@@ -50,15 +48,13 @@ class CategoryGoodsProvide with ChangeNotifier {
     }
     if (model.data != null && model.data.isNotEmpty) {
       _goodsList.addAll(model.data);
-      
+
       notifyListeners();
     }
-    
-    
   }
 
   Future<CategoryGoodsModel> _requestCategoryGoods(
-    String category, String subCategory, int page) async {
+      String category, String subCategory, int page) async {
     var paras = {
       'categoryId': category,
       'categorySubId': subCategory,
