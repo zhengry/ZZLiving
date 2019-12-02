@@ -27,7 +27,8 @@ class MinePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               border:
-                  Border(bottom: BorderSide(width: 10, color: Colors.black12))),
+                // Color(int) 16进制色值前两位表示透明度（00~FF)
+                  Border(bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
           child: Stack(alignment: Alignment.center, children: <Widget>[
             Image.network(
                 'https://c-ssl.duitang.com/uploads/item/201702/21/20170221003606_HG3xS.thumb.700_0.jpeg',
@@ -50,7 +51,7 @@ class MinePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 10, color: Colors.black12))),
+          border: Border(bottom: BorderSide(width: 10, color: Color(0xFFDCDCDC)))),
       child: Column(
         children: <Widget>[
           ListTile(

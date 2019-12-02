@@ -17,6 +17,7 @@ class CartPage extends StatelessWidget {
         appBar: AppBar(title: Text('购物车')),
         body: provide.shoppingCarts.isEmpty
             ? Center(child: Text('加载中'))
+            // 使用Stack 列表部分和底部合计部分会有重叠
             // : Stack(
             //   children: <Widget>[
             //     CartListView(cartList: provide.shoppingCarts),
